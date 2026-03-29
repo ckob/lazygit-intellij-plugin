@@ -22,9 +22,9 @@ import kotlin.math.max
 // --- MANAGER ---
 
 object LazygitManager {
-    private var ipcFile: File? = null
-    private var overlayFile: File? = null
-    private var watchThread: Thread? = null
+    private val IPC_FILE_KEY = com.intellij.openapi.util.Key.create<File>("lazygit.ipcFile")
+    private val OVERLAY_FILE_KEY = com.intellij.openapi.util.Key.create<File>("lazygit.overlayFile")
+    private val WATCH_THREAD_KEY = com.intellij.openapi.util.Key.create<Thread>("lazygit.watchThread")
     
     fun toggleLazygit(project: Project) {
         val editorManager = FileEditorManager.getInstance(project)
@@ -37,6 +37,7 @@ object LazygitManager {
         setupIpc(project)
         
         val lazygitConfig = getLazygitConfigPath()
+        val overlayFile = project.getUserData(OVERLAY_FILE_KEY)
         
         // Create our custom virtual file and tell the IDE to open it
         val file = LazygitVirtualFile(lazygitConfig, overlayFile!!.absolutePath)
@@ -44,35 +45,39 @@ object LazygitManager {
     }
     
     private fun setupIpc(project: Project) {
-        if (ipcFile != null && ipcFile!!.exists()) return
+        var ipcFile = project.getUserData(IPC_FILE_KEY)
+        if (ipcFile != null && ipcFile.exists()) return
         
         val suffix = "${System.currentTimeMillis()}-${ProcessHandle.current().pid()}"
         val tmpDir = System.getProperty("java.io.tmpdir")
         
         ipcFile = File(tmpDir, "lazygit-intellij-ipc-$suffix.tmp")
-        ipcFile!!.createNewFile()
+        ipcFile.createNewFile()
+        project.putUserData(IPC_FILE_KEY, ipcFile)
         
         val overlayYaml = """
             os:
-              edit: 'printf "%s\t0\n" "{{filename}}" > "${ipcFile!!.absolutePath.replace("\\", "\\\\")}"'
-              editAtLine: 'printf "%s\t%s\n" "{{filename}}" "{{line}}" > "${ipcFile!!.absolutePath.replace("\\", "\\\\")}"'
+              edit: 'printf "%s\t0\n" "{{filename}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+              editAtLine: 'printf "%s\t%s\n" "{{filename}}" "{{line}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
             notARepository: skip
             promptToReturnFromSubprocess: false
         """.trimIndent()
         
-        overlayFile = File(tmpDir, "lazygit-intellij-config-$suffix.yml")
-        overlayFile!!.writeText(overlayYaml)
+        val overlayFile = File(tmpDir, "lazygit-intellij-config-$suffix.yml")
+        overlayFile.writeText(overlayYaml)
+        project.putUserData(OVERLAY_FILE_KEY, overlayFile)
         
-        startIpcWatcher(project, ipcFile!!)
+        startIpcWatcher(project, ipcFile)
     }
     
     private fun startIpcWatcher(project: Project, file: File) {
+        var watchThread = project.getUserData(WATCH_THREAD_KEY)
         watchThread?.interrupt()
         
         watchThread = thread(start = true, isDaemon = true) {
             try {
                 var lastModified = file.lastModified()
-                while (!Thread.currentThread().isInterrupted) {
+                while (!Thread.currentThread().isInterrupted && !project.isDisposed) {
                     val currentModified = file.lastModified()
                     if (currentModified > lastModified) {
                         val content = file.readText().trim()
@@ -91,6 +96,7 @@ object LazygitManager {
                 e.printStackTrace()
             }
         }
+        project.putUserData(WATCH_THREAD_KEY, watchThread)
     }
     
     private fun handleIpcMessage(project: Project, content: String) {

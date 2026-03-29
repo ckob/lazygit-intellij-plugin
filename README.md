@@ -2,7 +2,7 @@
 
 Native integration of LazyGit directly in IntelliJ IDEs (such as IDEA, Rider, WebStorm, etc.).
 
-This plugin is inspired by the `lazygit-vscode` extension. It allows you to toggle LazyGit in the IntelliJ Terminal tool window, and use the `e` or `o` shortcut to open a file directly in a new editor tab from the LazyGit window without any manual configuration.
+This plugin is inspired by the `lazygit-vscode` extension. It allows you to toggle LazyGit in a full-screen editor tab, and use the `e` shortcut to open a file directly in the current IDE instance without any manual configuration.
 
 ## Usage
 - Search for the action `Lazygit: Toggle` in the IDE (Double Shift or `Cmd+Shift+A`).
@@ -17,13 +17,15 @@ nmap <leader>gg <Action>(Lazygit.Toggle)
 ```
 
 ## Features
-- Toggle LazyGit in a full-screen editor tab.
-- Re-uses existing LazyGit tab if already open.
-- Use `e` or `o` to open a file in a new tab from the LazyGit window.
-- Automatic closing of the editor tab when exiting LazyGit (`q`).
+- **Zero Configuration:** Works out of the box without any manual setup of `$EDITOR` or Lazygit config files.
+- **Smart Routing:** Files always open in the same IDE instance where Lazygit is running, even with multiple projects or IDEs open.
+- **Immersive UI:** Toggles LazyGit in a dedicated, full-screen editor tab rather than a tool window.
+- **Re-uses existing tab:** Automatically focuses the existing LazyGit tab if it's already open.
+- **Native Edit:** Use `e` to open a file in a new tab from the LazyGit window.
+- **Automatic Cleanup:** The editor tab closes automatically when you exit LazyGit (`q`).
 
 ## How it works
-This plugin automatically configures LazyGit's edit commands using an overlay config and IPC to open files through the IntelliJ API instead of an external process. 
+This plugin automatically configures LazyGit's edit commands using an overlay config and a custom IPC bridge. This ensures that opening a file from LazyGit always targets the specific IDE project window where you are currently working.
 
 ## Development
 

@@ -4,11 +4,29 @@
     <vendor url="https://ckob.dev">ckob</vendor>
 
     <description><![CDATA[
-    Native integration of LazyGit directly in IntelliJ IDEs.<br>
-    Features high-performance IPC for opening files directly from LazyGit into the IDE editor.
+    <p>Bring the speed and elegance of <b>Lazygit</b> directly into your JetBrains IDE. No more context switching between your terminal and your editor.</p>
+
+    <h3>✨ Zero-Config Native File Editing</h3>
+    <p>Forget about writing custom bash scripts or fighting with complex <code>$EDITOR</code> configurations. This plugin features a custom, high-performance IPC (Inter-Process Communication) bridge. <b>Simply press <code>e</code> on any file in Lazygit</b>, and it will instantly open right in your IDE's editor. It works completely out of the box in <i>any</i> IntelliJ-based IDE without a single line of extra configuration.</p>
+
+    <h3>🚀 Key Features</h3>
+    <ul>
+        <li><b>Immersive UI:</b> Toggles Lazygit in a dedicated, full-screen editor tab rather than a cramped tool window, giving your git graph the space it deserves.</li>
+        <li><b>Instant Edit:</b> Native file opening via IPC. Hit <code>e</code> and start typing.</li>
+        <li><b>Smart Lifecycle:</b> Automatically cleans up and closes the IDE tab the moment you exit Lazygit (pressing <code>q</code>).</li>
+        <li><b>IdeaVim Friendly:</b> Easily map the toggle action (<code>:action Lazygit.Toggle</code>) to your favorite Vim keybinding for a seamless workflow.</li>
+    </ul>
+
+    <br/>
+    <p><i>Note: You must have the <a href="https://github.com/jesseduffield/lazygit">Lazygit executable</a> installed on your system to use this plugin.</i></p>
     ]]></description>
 
     <change-notes><![CDATA[
+    Version (0.1.1):
+    <ul>
+        <li>Fix: Correctly isolate lazygit instances per project window to fix file opening in multiple IDE instances.</li>
+    </ul>
+    <br/>
     Initial release (0.1.0):
     <ul>
         <li>Toggle LazyGit in a full-screen editor tab.</li>
@@ -29,6 +47,6 @@
     <actions>
         <action id="Lazygit.Toggle" class="dev.ckob.lazygit.LazygitAction" text="Lazygit: Toggle" description="Toggle LazyGit window">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt g"/> </action>
     </actions>
 </idea-plugin>

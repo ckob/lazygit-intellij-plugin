@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="40" height="40">
+    <rect width="100%" height="100%" fill="transparent" />
+
+    <g transform="translate(0, 130)">
+        
+        <defs>
+            <mask id="headCutoutLight">
+                <rect width="100%" height="100%" fill="white" />
+                <circle cx="320" cy="340" r="25" fill="black" />
+                <path d="M 275,285 Q 285,270 295,285" fill="none" stroke="black" stroke-width="6" stroke-linecap="round" />
+            </mask>
+        </defs>
+
+        <line x1="110" y1="170" x2="200" y2="520" stroke="#363636" stroke-width="36" stroke-linecap="round"/>
+        <line x1="200" y1="520" x2="700" y2="520" stroke="#363636" stroke-width="36" stroke-linecap="round"/>
+
+        <path d="M 175,410 Q 200,480 230,515 L 480,515 C 540,515 540,400 400,380 C 320,366 260,360 175,410 Z" fill="#363636"/>
+
+        <path d="M 218,270 A 60 60 0 1 0 322,270 Z" fill="#363636" mask="url(#headCutoutLight)" />
+
+        <path d="M 218,270 C 220,150 290,150 350,190 C 310,210 310,240 322,270 Z" fill="#2ed573" />
+        <circle cx="350" cy="190" r="25" fill="#2ed573" />
+
+        <circle cx="110" cy="170" r="46" fill="#ff66ff" stroke="#363636" stroke-width="24" />
+        <circle cx="200" cy="520" r="46" fill="#ffff00" stroke="#363636" stroke-width="24" />
+        <circle cx="700" cy="520" r="46" fill="#00ffff" stroke="#363636" stroke-width="24" />
+        
+    </g>
+</svg>
