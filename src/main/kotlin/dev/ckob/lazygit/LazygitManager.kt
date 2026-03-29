@@ -57,8 +57,8 @@ object LazygitManager {
         
         val overlayYaml = """
             os:
-              edit: 'printf "%s\t0\n" "{{filename}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
-              editAtLine: 'printf "%s\t%s\n" "{{filename}}" "{{line}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+              edit: 'printf "%s\t0\n" {{filename}} > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+              editAtLine: 'printf "%s\t%s\n" {{filename}} "{{line}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
             notARepository: skip
             promptToReturnFromSubprocess: false
         """.trimIndent()
@@ -100,17 +100,19 @@ object LazygitManager {
     }
     
     private fun handleIpcMessage(project: Project, content: String) {
-        val parts = content.split("\t")
-        val filePath = parts.getOrNull(0)?.trim() ?: return
-        val lineNum = parts.getOrNull(1)?.toIntOrNull() ?: 0
-        
-        ApplicationManager.getApplication().invokeLater {
-            val file = File(if (File(filePath).isAbsolute) filePath else "${project.basePath}/$filePath")
-            val virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(file)
-            
-            if (virtualFile != null) {
-                val descriptor = OpenFileDescriptor(project, virtualFile, max(0, lineNum - 1), 0)
-                FileEditorManager.getInstance(project).openTextEditor(descriptor, true)
+        content.lines().filter { it.isNotBlank() }.forEach { line ->
+            val parts = line.split("\t")
+            val filePath = parts.getOrNull(0)?.trim() ?: return@forEach
+            val lineNum = parts.getOrNull(1)?.toIntOrNull() ?: 0
+
+            ApplicationManager.getApplication().invokeLater {
+                val file = File(if (File(filePath).isAbsolute) filePath else "${project.basePath}/$filePath")
+                val virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(file)
+
+                if (virtualFile != null) {
+                    val descriptor = OpenFileDescriptor(project, virtualFile, max(0, lineNum - 1), 0)
+                    FileEditorManager.getInstance(project).openTextEditor(descriptor, true)
+                }
             }
         }
     }

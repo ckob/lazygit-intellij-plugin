@@ -21,7 +21,7 @@ nmap <leader>gg <Action>(Lazygit.Toggle)
 - **Smart Routing:** Files always open in the same IDE instance where Lazygit is running, even with multiple projects or IDEs open.
 - **Immersive UI:** Toggles LazyGit in a dedicated, full-screen editor tab rather than a tool window.
 - **Re-uses existing tab:** Automatically focuses the existing LazyGit tab if it's already open.
-- **Native Edit:** Use `e` to open a file in a new tab from the LazyGit window.
+- **Native Edit:** Use `e` to open a file (or multiple selected files via visual/select mode) in new tabs from the LazyGit window.
 - **Automatic Cleanup:** The editor tab closes automatically when you exit LazyGit (`q`).
 
 ## How it works

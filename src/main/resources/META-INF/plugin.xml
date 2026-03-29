@@ -22,6 +22,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    Version (0.1.2):
+    <ul>
+        <li>Feature: Added support for opening multiple selected files at once (using visual/select mode and pressing 'e').</li>
+    </ul>
+    <br/>
     Version (0.1.1):
     <ul>
         <li>Fix: Correctly isolate lazygit instances per project window to fix file opening in multiple IDE instances.</li>
