@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="dev.ckob.lazygit.LazygitIdeaVimInitializer"/>
+    </extensions>
+</idea-plugin>

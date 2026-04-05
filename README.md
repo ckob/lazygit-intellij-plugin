@@ -1,11 +1,16 @@
 # LazyGit for IntelliJ
 
-Native integration of LazyGit directly in IntelliJ IDEs (such as IDEA, Rider, WebStorm, etc.).
+Native integration of [LazyGit](https://github.com/jesseduffield/lazygit) directly in IntelliJ IDEs (such as IDEA, Rider, WebStorm, etc.).
 
 This plugin is inspired by the `lazygit-vscode` extension. It allows you to toggle LazyGit in a full-screen editor tab, and use the `e` shortcut to open a file directly in the current IDE instance without any manual configuration.
 
+## Installation
+- Install the plugin from the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/30919-lazygit).
+- Alternatively, search for **"Lazygit"** (by ckob) directly in your IDE via `Settings` -> `Plugins` -> `Marketplace`.
+
 ## Usage
 - Search for the action `Lazygit: Toggle` in the IDE (Double Shift or `Cmd+Shift+A`).
+- **Default Shortcut:** `Ctrl+Alt+G` (or `Cmd+Option+G` on macOS).
 - You can assign a custom keyboard shortcut in `Settings -> Keymap`.
 
 ### IdeaVim Configuration
@@ -38,5 +43,9 @@ This project uses the standard Gradle-based IntelliJ Platform Plugin structure.
 
 ## Manual Installation
 1. Go to `Settings` -> `Plugins` -> ⚙️ (Gear Icon) -> `Install Plugin from Disk...`
-2. Select the `lazygit-intellij-1.0-SNAPSHOT.zip` file generated in `build/distributions/`.
+2. Select the `lazygit-intellij-<version>.zip` file generated in `build/distributions/`.
 3. Restart your IDE.
+
+## Acknowledgments
+- [LazyGit](https://github.com/jesseduffield/lazygit) by Jesse Duffield.
+- The [lazygit-vscode](https://github.com/tom-pollak/lazygit-vscode) extension by Tom Pollak for the original inspiration.

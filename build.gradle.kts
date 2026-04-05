@@ -5,16 +5,16 @@ plugins {
 }
 
 group = "dev.ckob.lazygit"
-version = "0.1.2"
+version = "0.1.3"
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    version.set("2023.2.5")
+    version.set("2024.1")
     type.set("IC")
-    plugins.set(listOf("org.jetbrains.plugins.terminal"))
+    plugins.set(listOf("org.jetbrains.plugins.terminal", "IdeaVIM:2.10.2"))
 }
 
 tasks {
@@ -26,7 +26,7 @@ tasks {
         kotlinOptions.jvmTarget = "17"
     }
     patchPluginXml {
-        sinceBuild.set("232")
+        sinceBuild.set("241")
         untilBuild.set("261.*")
     }
 
