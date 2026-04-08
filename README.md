@@ -28,6 +28,7 @@ nmap <leader>gg <Action>(Lazygit.Toggle)
 - **Re-uses existing tab:** Automatically focuses the existing LazyGit tab if it's already open.
 - **Native Edit:** Use `e` to open a file (or multiple selected files via visual/select mode) in new tabs from the LazyGit window.
 - **Automatic Cleanup:** The editor tab closes automatically when you exit LazyGit (`q`).
+- **Custom Configuration:** Specify a custom Lazygit configuration file and executable path in `Settings -> Tools -> Lazygit`.
 
 ## How it works
 This plugin automatically configures LazyGit's edit commands using an overlay config and a custom IPC bridge. This ensures that opening a file from LazyGit always targets the specific IDE project window where you are currently working.

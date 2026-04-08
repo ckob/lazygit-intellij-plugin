@@ -118,22 +118,42 @@ object LazygitManager {
     }
     
     private fun getLazygitConfigPath(): String {
+        val customConfig = LazygitSettingsState.instance.customConfigPath
+        if (customConfig.isNotBlank()) {
+            return customConfig
+        }
+
         val os = System.getProperty("os.name").lowercase()
         val home = System.getProperty("user.home")
-        
+
+        val possibleDirs = mutableListOf<String>()
+
+        System.getenv("XDG_CONFIG_HOME")?.let { possibleDirs.add("$it/lazygit") }
+
+        if (os.contains("mac")) {
+            possibleDirs.add("$home/.config/lazygit")
+            possibleDirs.add("$home/Library/Application Support/lazygit")
+        } else if (os.contains("win")) {
+            System.getenv("APPDATA")?.let { possibleDirs.add("$it/lazygit") }
+            possibleDirs.add("$home/AppData/Roaming/lazygit")
+            possibleDirs.add("$home/AppData/Local/lazygit")
+            possibleDirs.add("$home/.config/lazygit")
+        } else {
+            possibleDirs.add("$home/.config/lazygit")
+        }
+
+        for (dir in possibleDirs) {
+            val yml = File("$dir/config.yml")
+            if (yml.exists()) return yml.absolutePath
+
+            val yaml = File("$dir/config.yaml")
+            if (yaml.exists()) return yaml.absolutePath
+        }
+
         return when {
-            os.contains("mac") -> {
-                System.getenv("XDG_CONFIG_HOME")?.let { "$it/lazygit/config.yml" }
-                    ?: "$home/Library/Application Support/lazygit/config.yml"
-            }
-            os.contains("win") -> {
-                System.getenv("APPDATA")?.let { "$it/lazygit/config.yml" }
-                    ?: "$home/AppData/Roaming/lazygit/config.yml"
-            }
-            else -> {
-                System.getenv("XDG_CONFIG_HOME")?.let { "$it/lazygit/config.yml" }
-                    ?: "$home/.config/lazygit/config.yml"
-            }
+            os.contains("mac") -> "$home/Library/Application Support/lazygit/config.yml"
+            os.contains("win") -> "$home/AppData/Roaming/lazygit/config.yml"
+            else -> "$home/.config/lazygit/config.yml"
         }
     }
 }
@@ -161,7 +181,12 @@ class LazygitEditor(
         val envs = EnvironmentUtil.getEnvironmentMap().toMutableMap()
         
         // Find lazygit executable robustly
-        val lazygitPath = PathEnvironmentVariableUtil.findInPath("lazygit", envs["PATH"], null)?.absolutePath ?: "lazygit"
+        val customExecutable = LazygitSettingsState.instance.customExecutablePath
+        val lazygitPath = if (customExecutable.isNotBlank()) {
+            customExecutable
+        } else {
+            PathEnvironmentVariableUtil.findInPath("lazygit", envs["PATH"], null)?.absolutePath ?: "lazygit"
+        }
         
         val shellCommand = if (SystemInfo.isWindows) {
             listOf("cmd.exe", "/c", "\"$lazygitPath\" --use-config-file=\"${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}\"")

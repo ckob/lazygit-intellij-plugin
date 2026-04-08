@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.ckob.lazygit"
-version = "0.1.3"
+version = "0.2.2"
 
 repositories {
     mavenCentral()
