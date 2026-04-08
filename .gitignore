@@ -1,15 +1,7 @@
-# IntelliJ IDE
-.idea/
-*.iml
-out/
-
-# Gradle
-.gradle/
-build/
-gradlew
-gradlew.bat
-gradle/
-
-# OS
 .DS_Store
-Thumbs.db
+.gradle
+.idea
+.intellijPlatform
+.kotlin
+.qodana
+build
