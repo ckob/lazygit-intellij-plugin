@@ -22,50 +22,6 @@
     <p><i>Note: You must have the <a href="https://github.com/jesseduffield/lazygit">Lazygit executable</a> installed on your system to use this plugin.</i></p>
     ]]></description>
 
-    <change-notes><![CDATA[
-    Version (0.2.2):
-    <ul>
-        <li>Fix: Resolved 'scheduled for removal' API warnings in the settings panel to ensure full compatibility with IntelliJ 2026.1 and future releases.</li>
-    </ul>
-    <br/>
-    Version (0.2.1):
-    <ul>
-        <li>Fix: Resolved deprecation warnings related to the UI DSL v1 in the settings panel to ensure compatibility with IntelliJ 2026.1 and future releases.</li>
-    </ul>
-    <br/>
-    Version (0.2.0):
-    <ul>
-        <li>Feature: Added a settings page under <code>Settings -&gt; Tools -&gt; Lazygit</code> to specify custom config file and executable paths.</li>
-        <li>Fix: Improved default configuration path resolution, especially for macOS users using <code>~/.config/lazygit</code>.</li>
-    </ul>
-    <br/>
-    Version (0.1.3):
-    <ul>
-        <li>Feature: Added IdeaVim integration. Exposes <code>g:loaded_lazygit = 1</code> to Vimscript for conditional keybindings.</li>
-        <li>Update: Bumped minimum required IDE version to 2024.1 to support the modern IdeaVim API.</li>
-        <li>Fix: Disabled dynamic plugin unloading to prevent IDE freezes when updating or disabling the plugin. A restart is now required when changing plugin state.</li>
-    </ul>
-    <br/>
-    Version (0.1.2):
-    <ul>
-        <li>Feature: Added support for opening multiple selected files at once (using visual/select mode and pressing 'e').</li>
-    </ul>
-    <br/>
-    Version (0.1.1):
-    <ul>
-        <li>Fix: Correctly isolate lazygit instances per project window to fix file opening in multiple IDE instances.</li>
-    </ul>
-    <br/>
-    Initial release (0.1.0):
-    <ul>
-        <li>Toggle LazyGit in a full-screen editor tab.</li>
-        <li>Native file opening (press 'e' in LazyGit to open in IDE).</li>
-        <li>Automatic closing of editor tab when exiting LazyGit.</li>
-        <li>IdeaVim support via :action Lazygit.Toggle.</li>
-    </ul>
-    ]]>
-    </change-notes>
-
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
     <depends optional="true" config-file="lazygit-ideavim.xml">IdeaVIM</depends>
