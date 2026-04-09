@@ -187,7 +187,7 @@ class LazygitEditor(
         }
         
         val shellCommand = if (SystemInfo.isWindows) {
-            listOf("cmd.exe", "/c", "\"$lazygitPath\" --use-config-file=\"${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}\"")
+            listOf("cmd.exe", "/c", "\"\"$lazygitPath\" --use-config-file=\"${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}\"\"")
         } else {
             listOf("/bin/sh", "-c", "\"$lazygitPath\" --use-config-file=\"${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}\"; exit")
         }
