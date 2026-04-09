@@ -4,6 +4,9 @@
 ### Added
 - Integrated official JetBrains plugin template CI/CD workflows and automated changelog generation.
 
+### Fixed
+- Fixed an issue on Windows where the `lazygit` command failed due to `cmd.exe` quote stripping.
+
 ## [0.2.2]
 ### Fixed
 - Resolved 'scheduled for removal' API warnings in the settings panel to ensure full compatibility with IntelliJ 2026.1 and future releases.
