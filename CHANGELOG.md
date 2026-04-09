@@ -1,4 +1,8 @@
-# IntelliJ Platform Plugin Template Changelog
+# Lazygit Changelog
+
+## [0.2.3]
+### Added
+- Integrated official JetBrains plugin template CI/CD workflows and automated changelog generation.
 
 ## [0.2.2]
 ### Fixed

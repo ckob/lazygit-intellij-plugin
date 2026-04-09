@@ -1,1 +1,5 @@
-rootProject.name = "lazygit-intellij"
+rootProject.name = "Lazygit"
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}

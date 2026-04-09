@@ -1,8 +1,10 @@
 # LazyGit for IntelliJ
 
+<!-- Plugin description -->
 Native integration of [LazyGit](https://github.com/jesseduffield/lazygit) directly in IntelliJ IDEs (such as IDEA, Rider, WebStorm, etc.).
 
 This plugin is inspired by the `lazygit-vscode` extension. It allows you to toggle LazyGit in a full-screen editor tab, and use the `e` shortcut to open a file directly in the current IDE instance without any manual configuration.
+<!-- Plugin description end -->
 
 ## Installation
 - Install the plugin from the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/30919-lazygit).

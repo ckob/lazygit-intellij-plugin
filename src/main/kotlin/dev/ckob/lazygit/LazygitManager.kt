@@ -182,9 +182,7 @@ class LazygitEditor(
         
         // Find lazygit executable robustly
         val customExecutable = LazygitSettingsState.instance.customExecutablePath
-        val lazygitPath = if (customExecutable.isNotBlank()) {
-            customExecutable
-        } else {
+        val lazygitPath = customExecutable.ifBlank {
             PathEnvironmentVariableUtil.findInPath("lazygit", envs["PATH"], null)?.absolutePath ?: "lazygit"
         }
         
