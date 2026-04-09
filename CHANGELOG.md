@@ -1,6 +1,6 @@
 # Lazygit Changelog
 
-## [0.2.3]
+## [Unreleased]
 ### Added
 - Integrated official JetBrains plugin template CI/CD workflows and automated changelog generation.
 
