@@ -5,7 +5,7 @@
 - Integrated official JetBrains plugin template CI/CD workflows and automated changelog generation.
 
 ### Fixed
-- Fixed an issue on Windows where the `lazygit` command failed due to `cmd.exe` quote stripping.
+- Improved executable launching by bypassing the intermediate shell (`cmd.exe` / `sh`), which fixes path quoting issues on Windows and improves startup safety.
 
 ## [0.2.2]
 ### Fixed

@@ -185,12 +185,10 @@ class LazygitEditor(
         val lazygitPath = customExecutable.ifBlank {
             PathEnvironmentVariableUtil.findInPath("lazygit", envs["PATH"], null)?.absolutePath ?: "lazygit"
         }
-        
-        val shellCommand = if (SystemInfo.isWindows) {
-            listOf("cmd.exe", "/c", "\"\"$lazygitPath\" --use-config-file=\"${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}\"\"")
-        } else {
-            listOf("/bin/sh", "-c", "\"$lazygitPath\" --use-config-file=\"${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}\"; exit")
-        }
+        val shellCommand = listOf(
+            lazygitPath,
+            "--use-config-file=${virtualFile.lazygitConfigPath},${virtualFile.overlayFilePath}"
+        )
         
         val startupOptions = ShellStartupOptions.Builder()
             .workingDirectory(project.basePath)
