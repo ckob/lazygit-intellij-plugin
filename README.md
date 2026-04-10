@@ -1,10 +1,14 @@
 # LazyGit for IntelliJ
 
 <!-- Plugin description -->
+Bring the speed and elegance of **Lazygit** directly into your JetBrains IDE. No more context switching between your terminal and your editor.
+
+### ✨ Zero-Config Native File Editing
+Forget about writing custom bash scripts or fighting with complex `$EDITOR` configurations. This plugin features a custom, high-performance IPC (Inter-Process Communication) bridge. **Simply press `e` on any file in Lazygit**, and it will instantly open right in your IDE's editor. It works completely out of the box in *any* IntelliJ-based IDE without a single line of extra configuration.
+
 Native integration of [LazyGit](https://github.com/jesseduffield/lazygit) directly in IntelliJ IDEs (such as IDEA, Rider, WebStorm, etc.).
 
 This plugin is inspired by the `lazygit-vscode` extension. It allows you to toggle LazyGit in a full-screen editor tab, and use the `e` shortcut to open a file directly in the current IDE instance without any manual configuration.
-<!-- Plugin description end -->
 
 ## Installation
 - Install the plugin from the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/30919-lazygit).
@@ -31,6 +35,8 @@ nmap <leader>gg <Action>(Lazygit.Toggle)
 - **Native Edit:** Use `e` to open a file (or multiple selected files via visual/select mode) in new tabs from the LazyGit window.
 - **Automatic Cleanup:** The editor tab closes automatically when you exit LazyGit (`q`).
 - **Custom Configuration:** Specify a custom Lazygit configuration file and executable path in `Settings -> Tools -> Lazygit`.
+
+<!-- Plugin description end -->
 
 ## How it works
 This plugin automatically configures LazyGit's edit commands using an overlay config and a custom IPC bridge. This ensures that opening a file from LazyGit always targets the specific IDE project window where you are currently working.
