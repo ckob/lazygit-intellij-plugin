@@ -55,13 +55,24 @@ object LazygitManager {
         ipcFile.createNewFile()
         project.putUserData(IPC_FILE_KEY, ipcFile)
         
-        val overlayYaml = """
+        val isWindows = SystemInfo.isWindows
+        val overlayYaml = if (isWindows) {
+            """
             os:
-              edit: 'printf "%s\t0\n" {{filename}} > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
-              editAtLine: 'printf "%s\t%s\n" {{filename}} "{{line}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+              edit: 'cmd /c (for %I in ({{filename}}) do echo "%~I"::::0) > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+              editAtLine: 'cmd /c (for %I in ({{filename}}) do echo "%~I"::::{{line}}) > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
             notARepository: skip
             promptToReturnFromSubprocess: false
-        """.trimIndent()
+            """.trimIndent()
+        } else {
+            """
+            os:
+              edit: 'printf "%s::::0\n" {{filename}} > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+              editAtLine: 'printf "%s::::%s\n" {{filename}} "{{line}}" > "${ipcFile.absolutePath.replace("\\", "\\\\")}"'
+            notARepository: skip
+            promptToReturnFromSubprocess: false
+            """.trimIndent()
+        }
         
         val overlayFile = File(tmpDir, "lazygit-intellij-config-$suffix.yml")
         overlayFile.writeText(overlayYaml)
@@ -101,9 +112,9 @@ object LazygitManager {
     
     private fun handleIpcMessage(project: Project, content: String) {
         content.lines().filter { it.isNotBlank() }.forEach { line ->
-            val parts = line.split("\t")
-            val filePath = parts.getOrNull(0)?.trim() ?: return@forEach
-            val lineNum = parts.getOrNull(1)?.toIntOrNull() ?: 0
+            val parts = line.split("::::")
+            val filePath = parts.getOrNull(0)?.trim()?.removeSurrounding("\"") ?: return@forEach
+            val lineNum = parts.getOrNull(1)?.trim()?.toIntOrNull() ?: 0
 
             ApplicationManager.getApplication().invokeLater {
                 val file = File(if (File(filePath).isAbsolute) filePath else "${project.basePath}/$filePath")
