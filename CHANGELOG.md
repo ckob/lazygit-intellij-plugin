@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-04-16
+
 ### Fixed
 
 - Resolved an issue on Windows where opening files from Lazygit failed with a "printf command not found" error by replacing `printf` with an OS-specific `cmd /c for` loop.
@@ -74,7 +76,8 @@
 - Automatic closing of editor tab when exiting LazyGit.
 - IdeaVim support via :action Lazygit.Toggle.
 
-[Unreleased]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.3...HEAD
+[Unreleased]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.4...HEAD
+[0.2.4]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.0...0.2.1
