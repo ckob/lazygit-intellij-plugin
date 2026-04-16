@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Resolved an issue on Windows where opening files from Lazygit failed with a "printf command not found" error by replacing `printf` with an OS-specific `cmd /c for` loop.
+- Improved the reliability of the IPC file parsing to handle filenames with spaces and multiple selected files robustly across different operating systems.
+
 ## [0.2.3] - 2026-04-12
 
 ### Added
