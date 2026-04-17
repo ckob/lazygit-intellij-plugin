@@ -15,16 +15,19 @@ This plugin is inspired by the `lazygit-vscode` extension. It allows you to togg
 - Alternatively, search for **"Lazygit"** (by ckob) directly in your IDE via `Settings` -> `Plugins` -> `Marketplace`.
 
 ## Usage
-- Search for the action `Lazygit: Toggle` in the IDE (Double Shift or `Cmd+Shift+A`).
-- **Default Shortcut:** `Ctrl+Alt+G` (or `Cmd+Option+G` on macOS).
-- You can assign a custom keyboard shortcut in `Settings -> Keymap`.
+- Search for the actions `Lazygit: Toggle (Project Root)` and `Lazygit: Toggle (Current File Directory)` in the IDE (Double Shift or `Cmd+Shift+A`).
+- **Default Shortcut (Project Root):** `Ctrl+Alt+G` (or `Cmd+Option+G` on macOS).
+- You can assign custom keyboard shortcuts in `Settings -> Keymap`.
 
 ### IdeaVim Configuration
-If you use IdeaVim, you can map the toggle action in your `.ideavimrc` file:
+If you use IdeaVim, you can map the toggle actions in your `.ideavimrc` file. For example, to match LazyVim's default keybindings:
 
 ```vim
-" Map <leader>gg to toggle LazyGit
+" Map <leader>gg to open LazyGit at the project root
 nmap <leader>gg <Action>(Lazygit.Toggle)
+
+" Map <leader>gG to open LazyGit at the current file's directory
+nmap <leader>gG <Action>(Lazygit.ToggleCurrentDir)
 ```
 
 ## Features

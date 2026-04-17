@@ -26,21 +26,26 @@ object LazygitManager {
     private val OVERLAY_FILE_KEY = com.intellij.openapi.util.Key.create<File>("lazygit.overlayFile")
     private val WATCH_THREAD_KEY = com.intellij.openapi.util.Key.create<Thread>("lazygit.watchThread")
     
-    fun toggleLazygit(project: Project) {
+    fun toggleLazygit(project: Project, workingDirectory: String? = null) {
         val editorManager = FileEditorManager.getInstance(project)
-        val existingFile = editorManager.openFiles.find { it is LazygitVirtualFile }
+        val targetWorkingDirectory = workingDirectory ?: project.basePath
+        
+        val existingFile = editorManager.openFiles.find { 
+            it is LazygitVirtualFile && it.workingDirectory == targetWorkingDirectory
+        }
         if (existingFile != null) {
             editorManager.openFile(existingFile, true)
             return
         }
 
         setupIpc(project)
-        
+
         val lazygitConfig = getLazygitConfigPath()
         val overlayFile = project.getUserData(OVERLAY_FILE_KEY)
-        
+
         // Create our custom virtual file and tell the IDE to open it
-        val file = LazygitVirtualFile(lazygitConfig, overlayFile!!.absolutePath)
+        val title = if (targetWorkingDirectory == project.basePath) "LazyGit" else "LazyGit (${File(targetWorkingDirectory!!).name})"
+        val file = LazygitVirtualFile(title, lazygitConfig, overlayFile!!.absolutePath, targetWorkingDirectory)
         editorManager.openFile(file, true)
     }
     
@@ -172,9 +177,21 @@ object LazygitManager {
 // --- VIRTUAL FILE ---
 
 class LazygitVirtualFile(
+    val title: String,
     val lazygitConfigPath: String,
-    val overlayFilePath: String
-) : LightVirtualFile("LazyGit")
+    val overlayFilePath: String,
+    val workingDirectory: String?
+) : LightVirtualFile(title) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is LazygitVirtualFile) return false
+        return workingDirectory == other.workingDirectory
+    }
+
+    override fun hashCode(): Int {
+        return workingDirectory?.hashCode() ?: 0
+    }
+}
 
 // --- FILE EDITOR ---
 
@@ -202,7 +219,7 @@ class LazygitEditor(
         )
         
         val startupOptions = ShellStartupOptions.Builder()
-            .workingDirectory(project.basePath)
+            .workingDirectory(virtualFile.workingDirectory)
             .shellCommand(shellCommand)
             .envVariables(envs)
             .build()
@@ -218,7 +235,7 @@ class LazygitEditor(
 
     override fun getComponent(): JComponent = terminalWidget.component
     override fun getPreferredFocusedComponent(): JComponent = terminalWidget.preferredFocusableComponent
-    override fun getName(): String = "LazyGit"
+    override fun getName(): String = virtualFile.title
     override fun getFile(): VirtualFile = virtualFile
     override fun isModified(): Boolean = false
     override fun isValid(): Boolean = true
