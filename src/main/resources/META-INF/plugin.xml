@@ -14,8 +14,13 @@
     </extensions>
 
     <actions>
-        <action id="Lazygit.Toggle" class="dev.ckob.lazygit.LazygitAction" text="Lazygit: Toggle" description="Toggle LazyGit window">
+        <action id="Lazygit.Toggle" class="dev.ckob.lazygit.LazygitAction" text="Lazygit: Toggle (Project Root)" description="Toggle LazyGit window at the project root">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt g"/> </action>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt g"/> 
+        </action>
+        <action id="Lazygit.ToggleCurrentDir" class="dev.ckob.lazygit.LazygitCurrentDirAction" text="Lazygit: Toggle (Current File Directory)" description="Toggle LazyGit window at the current file directory">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <!-- Add a default shortcut for the current dir action if needed, or leave it empty for user mapping -->
+        </action>
     </actions>
 </idea-plugin>

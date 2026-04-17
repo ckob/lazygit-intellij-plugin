@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added `Lazygit: Toggle (Current File Directory)` action, enabling context-aware Lazygit instances scoped to the currently focused file's directory.
+- Renamed the default action to `Lazygit: Toggle (Project Root)` for clarity.
+
 ## [0.2.4] - 2026-04-16
 
 ### Fixed
