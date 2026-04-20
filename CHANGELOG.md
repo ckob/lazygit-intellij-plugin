@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-20
+
 ### Added
 
 - Added `Lazygit: Toggle (Current File Directory)` action, enabling context-aware Lazygit instances scoped to the currently focused file's directory.
@@ -81,7 +83,8 @@
 - Automatic closing of editor tab when exiting LazyGit.
 - IdeaVim support via :action Lazygit.Toggle.
 
-[Unreleased]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.4...HEAD
+[Unreleased]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.3.0...HEAD
+[0.3.0]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.4...0.3.0
 [0.2.4]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.1...0.2.2
