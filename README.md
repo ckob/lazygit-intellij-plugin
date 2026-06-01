@@ -1,4 +1,11 @@
+<div align="center">
+
 # LazyGit for IntelliJ
+[![JetBrains Plugin Version](https://img.shields.io/jetbrains/plugin/v/30919?style=flat-square)](https://plugins.jetbrains.com/plugin/30919-lazygit)
+[![JetBrains Plugin Rating](https://img.shields.io/jetbrains/plugin/r/rating/30919?style=flat-square)](https://plugins.jetbrains.com/plugin/30919-lazygit)
+[![JetBrains Plugin Downloads](https://img.shields.io/jetbrains/plugin/d/30919?style=flat-square)](https://plugins.jetbrains.com/plugin/30919-lazygit)
+
+</div>
 
 <!-- Plugin description -->
 Bring the speed and elegance of **Lazygit** directly into your JetBrains IDE. No more context switching between your terminal and your editor.
