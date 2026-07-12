@@ -65,6 +65,22 @@ This project uses the standard Gradle-based IntelliJ Platform Plugin structure.
 2. Select the `lazygit-intellij-<version>.zip` file generated in `build/distributions/`.
 3. Restart your IDE.
 
+## Maintaining & Releasing
+
+To release a new version of the plugin, you don't need to manually edit `CHANGELOG.md` or handle git tags. Follow these automated steps:
+
+1. **Update the version:** Change `pluginVersion` in `gradle.properties` to your target version (e.g. `0.3.1`).
+2. **Commit & Push:** Push this change to the `main` branch.
+3. **Build Draft Action:** The GitHub Actions `Build` workflow will run automatically, compile the plugin, and generate/update a **Draft Release** on GitHub containing the built assets.
+4. **Publish Release:** Go to your repository's **Releases** page on GitHub, click **Edit** on the draft, and then click **Publish Release**.
+5. **Auto-Patching:** Once published, the `Release` workflow automatically triggers, updates `CHANGELOG.md` with the release notes, publishes the plugin to the JetBrains Marketplace, and creates a pull request back to `main` with the patched changelog.
+
+### Managing Changelog Notes during Development
+
+You can maintain a running list of features and bug fixes under the `## [Unreleased]` section of `CHANGELOG.md` as you develop:
+- Write your changes under `## [Unreleased]` in the standard Keep a Changelog format.
+- When publishing the GitHub Release, you can leave the release notes body **empty**. The automated release action will automatically promote everything under `## [Unreleased]` to your new release version section, and format a fresh empty `## [Unreleased]` block at the top!
+
 ## Acknowledgments
 - [LazyGit](https://github.com/jesseduffield/lazygit) by Jesse Duffield.
 - The [lazygit-vscode](https://github.com/tom-pollak/lazygit-vscode) extension by Tom Pollak for the original inspiration.
