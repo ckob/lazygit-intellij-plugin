@@ -104,6 +104,8 @@ intellijPlatform {
         channels = providers.gradleProperty("pluginVersion").map { listOf(it.substringAfter('-', "").substringBefore('.').ifEmpty { "default" }) }
     }
 
+    instrumentCode = false
+
     pluginVerification {
         ides {
             select {
