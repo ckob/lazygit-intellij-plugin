@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-07-13
+
 ### Changed
 
 - Bumped Kotlin dependency versions and optimized Gradle platform configuration.
@@ -88,7 +90,8 @@
 - Automatic closing of editor tab when exiting LazyGit.
 - IdeaVim support via :action Lazygit.Toggle.
 
-[Unreleased]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.4...0.3.0
 [0.2.4]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/ckob/lazygit-intellij-plugin/compare/0.2.2...0.2.3
